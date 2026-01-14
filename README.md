@@ -13,6 +13,10 @@ composer install or composer update
 php artisan key:generate
 
 Setup
+to create a project
+composer global require laravel/installer
+laravel new projectname
+or
 composer create-project larave/laravel projname
 cd projname
 npm install

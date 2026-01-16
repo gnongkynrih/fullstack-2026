@@ -1,5 +1,6 @@
-<div class="max-w-7xl mx-auto p-6  min-h-screen flex items-center justify-center">
+<div class="max-w-7xl mx-auto p-6 min-h-screen   flex  justify-center">
   <div class="w-full max-w-md">
+    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" class="w-32 mx-auto mb-6">
     <!-- Login Card -->
     <x-card shadow separator class="bg-neutral-50">
       <div class="text-center mb-6">
@@ -12,7 +13,7 @@
           <x-input
             label="Email Address"
             wire:model="email"
-            type="email"
+            type="text"
             placeholder="Enter your email"
             icon="o-envelope"
             hint="We'll never share your email"
@@ -32,7 +33,7 @@
               <span class="ml-2 text-sm text-gray-700">Remember me</span>
             </label>
 
-            <a href="#" class="text-sm text-primary-600 hover:text-primary-500 font-medium">
+            <a href="{{ route('forgot-password')}}" class="text-sm text-primary-600 hover:text-primary-500 font-medium">
               Forgot password?
             </a>
           </div>

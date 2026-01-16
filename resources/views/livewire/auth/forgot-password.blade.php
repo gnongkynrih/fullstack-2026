@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto p-6 bg-neutral-50 min-h-screen flex items-center justify-center">
+<div class="max-w-7xl mx-auto p-6 bg-neutral-50 min-h-screen flex  justify-center">
   <div class="w-full max-w-md">
     <!-- Forgot Password Card -->
     <x-card shadow separator class="bg-white">

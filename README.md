@@ -69,9 +69,28 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 php artisan migrate
 // The User model requires this trait
 use HasRoles;
-
+//MIDDLEWARE
+// in the laravel bootstrap/app.php file
+add
+->withMiddleware(function (Middleware $middleware): void {
+$middleware->alias([
+'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+]);
+})
 //TO create seeders
 php artisan make:seeder NameSeeder
 eg> php artisan make:seeder RoleAndPermissionSeeder
 //to seed the database
 php artisan db:seed --class=RoleAndPermissionSeeder
+
+//TO TEST EMAIL
+https://github.com/mailhog/MailHog
+after installing we can use it as smtp server and edit the .env file
+MAIL_MAILER=smtp
+MAIL_HOST=localhost
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null

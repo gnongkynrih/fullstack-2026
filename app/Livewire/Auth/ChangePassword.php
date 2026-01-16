@@ -13,14 +13,14 @@ class ChangePassword extends Component
 
     protected $rules = [
         'current_password' => 'required',
-        'password' => 'required|min:8|confirmed',
+        'password' => 'required|min:4|confirmed',
     ];
 
     public function changePassword()
     {
         $this->validate();
-
-        if (!Hash::check($this->current_password, auth()->user()->password)) {
+        $checkUser = Hash::check($this->current_password, auth()->user()->password);
+        if (!$checkUser) {
             $this->addError('current_password', 'The current password is incorrect.');
             return;
         }

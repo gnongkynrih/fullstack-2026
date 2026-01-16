@@ -25,7 +25,7 @@
              @if($user = auth()->user())
             <x-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
             {{-- User Profile Submenu --}}
-            <x-dropdown>
+           <x-dropdown>    
                 <x-slot:trigger>
                     <x-button icon="o-user-circle" class="btn-ghost btn-sm" />
                 </x-slot:trigger>
@@ -37,17 +37,7 @@
     </x-nav>
     {{-- MAIN --}}
     <x-main full-width>
-        {{-- <x-nav sticky class="lg:hidden">
-            <x-slot:brand>
-                <div class="ml-5 pt-5">App</div>
-            </x-slot:brand>
-            <x-slot:actions>
-                <label for="main-drawer" class="lg:hidden mr-3">
-                    <x-icon name="o-bars-3" class="cursor-pointer" />
-                </label>
-            </x-slot:actions>
-        </x-nav> --}}
-        {{-- sidebar --}}
+       
         <x-layouts.sidebar />
         {{-- The `$slot` goes here --}}
         <x-slot:content class="bg-white">

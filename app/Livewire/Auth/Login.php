@@ -33,7 +33,9 @@ class Login extends Component
             $this->remember);
         if ($authenticate) {
             session()->regenerate(); //generates a new session id
-
+            if (Auth::user()->hasRole('waiter')) {
+                return redirect()->intended('/select-table'); //redirects to the intended page
+            }
             return redirect()->intended('/'); //redirects to the intended page
         }
 

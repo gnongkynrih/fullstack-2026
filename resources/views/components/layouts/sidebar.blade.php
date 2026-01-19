@@ -18,6 +18,9 @@
             <x-menu-item title="Users" link="{{route('admin.user')}}" />
         </x-menu-sub>
         @endrole       
+        @role('waiter')
+        <x-menu-item title="Select Table" link="{{route('select-table')}}" />
+        @endrole       
     </x-menu>
     
 </x-slot:sidebar>

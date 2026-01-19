@@ -10,6 +10,8 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\ChangePassword;
 use App\Livewire\Auth\ResetPassword;
+use App\Livewire\SelectTable;
+use App\Livewire\SelectItem;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -27,6 +29,8 @@ Route::get('/reset-password/{token}', ResetPassword::class)->name('password.rese
 Route::middleware('auth')->group(function () {
     Route::get('/', Welcome::class)->name('dashboard');
     Route::get('/change-password', ChangePassword::class)->name('change-password');
+    Route::get('/select-table', SelectTable::class)->name('select-table');
+    Route::get('/select-item', SelectItem::class)->name('select-item');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect()->route('login');

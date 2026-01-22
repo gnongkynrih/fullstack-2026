@@ -54,6 +54,9 @@ php artisan make:model MenuCategory -m
 //to migrate the table
 php artisan migrate
 
+//if we want to add more column to existing tables
+php artisan make:migration add_column_to_table_name --table=table_name
+eg. php artisan make:migration add_column_notes_to_orders --table=orders
 //relationships
 we define relationships in models
 eg. for belongsto we use singular name

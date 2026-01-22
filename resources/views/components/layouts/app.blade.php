@@ -25,7 +25,7 @@
              @if($user = auth()->user())
             <x-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
             {{-- User Profile Submenu --}}
-           <x-dropdown>    
+           <x-dropdown class="z-[999]">    
                 <x-slot:trigger>
                     <x-button icon="o-user-circle" class="btn-ghost btn-sm" />
                 </x-slot:trigger>

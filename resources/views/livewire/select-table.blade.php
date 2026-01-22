@@ -19,26 +19,28 @@
                         </span>
                     </div>
 
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 mt-10">
                         @if($table->status === 'available')
                             <x-button
                                 wire:click.stop="selectTable({{ $table->id }})"
                                 class="flex-1 bg-primary-500 hover:bg-primary-600 text-white"
                                 label="Select Table"
                             />
-                        @else
-                            <x-button
-                                class="flex-1 bg-gray-300 text-gray-500 cursor-not-allowed"
-                                label="Unavailable"
-                                disabled
-                            />
-                        @endif
 
-                        <x-button
+                            <x-button
                             wire:click.stop="reserveTable({{ $table->id }})"
                             class="px-3 {{ $table->status === 'reserved' ? 'bg-green-500 hover:bg-green-600' : 'bg-yellow-500 hover:bg-yellow-600' }} text-white"
                             label="{{ $table->status === 'reserved' ? 'Unreserve' : 'Reserve' }}"
                         />
+                        @else
+                            <x-button
+                                class="flex-1 bg-gray-300 text-gray-500 cursor-not-allowed"
+                                label="Open"
+                                disabled
+                            />
+                        @endif
+
+                        
                     </div>
                 </x-card>
             @endforeach

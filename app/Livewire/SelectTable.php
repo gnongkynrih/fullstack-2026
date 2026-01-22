@@ -17,14 +17,16 @@ class SelectTable extends Component
 
     public function mount(){
         session()->forget('table_session_id');
+        session()->forget('table_name');
     }
     public function selectTable($tableId)
     {
         //check if the table already has a session
-        $table = TableSession::where('restaurant_table_id', $tableId)
+        $tableSession = TableSession::where('restaurant_table_id', $tableId)
             ->where('status','open')->first();
-        if($table){
-            session()->put('table_session_id', $table->id);
+        if($tableSession){
+            session()->put('table_session_id', $tableSession->id);
+            session()->put('table_name', $tableSession->table->name);
             //redirect to the table session
             return $this->redirect(route('select-item'));
         }
@@ -49,6 +51,7 @@ class SelectTable extends Component
             \DB::commit();
 
             session()->put('table_session_id', $table->id);
+            
             return $this->redirect(route('select-item'));
         } catch (\Exception $e) {
             \DB::rollBack();

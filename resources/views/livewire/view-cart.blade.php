@@ -5,7 +5,7 @@
             <div class="flex items-center justify-between">
                 <button
                     wire:click="back"
-                    class="p-2 hover:bg-gray-100 rounded-full"
+                    class="p-2 hover:bg-primary-100 rounded-full"
                 >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -26,9 +26,6 @@
                         <!-- Item Details -->
                         <div class="flex-1 min-w-0">
                             <h3 class="font-medium text-gray-900 truncate">{{ $item->menuItem->name }}</h3>
-                            @if($item->menuItem->description)
-                                <p class="text-sm text-gray-600 mt-1 line-clamp-2">{{ $item->menuItem->description }}</p>
-                            @endif
                             <p class="text-sm font-medium text-primary-600 mt-1">₹{{ number_format($item->unit_price, 2) }}</p>
                         </div>
 
@@ -38,18 +35,14 @@
                                 wire:click="decreaseQuantity({{ $item->id }})"
                                 class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center"
                             >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                                </svg>
+                                -
                             </button>
                             <span class="w-8 text-center font-medium">{{ $item->quantity }}</span>
                             <button
                                 wire:click="increaseQuantity({{ $item->id }})"
                                 class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center"
                             >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                </svg>
+                                +
                             </button>
                         </div>
                     </div>

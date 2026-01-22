@@ -20,7 +20,10 @@
         @endrole       
         @role('waiter')
         <x-menu-item title="Select Table" link="{{route('select-table')}}" />
-        @endrole       
+        @endrole 
+        @auth
+            <x-menu-item title="View Order" link="{{route('view-order')}}" />
+        @endauth      
     </x-menu>
     
 </x-slot:sidebar>

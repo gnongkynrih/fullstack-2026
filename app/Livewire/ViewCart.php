@@ -25,7 +25,7 @@ class ViewCart extends Component
         $tableSessionId = session('table_session_id');
         $this->order = Order::where('table_session_id', $tableSessionId)
             ->where('status', 'open')
-            ->with('orderItems.menuItem')
+            // ->with('orderItems.menuItem')
             ->first();
 
         
@@ -38,8 +38,12 @@ class ViewCart extends Component
 
     public function loadCartItems()
     {
+        //select o.*,i*,m.* from orders o inner join order_items i
+        //on o.id = i.order_id 
+        // inner join menu_items m on i.menu_item_id = m.id
+
         $this->cartItems = $this->order->orderItems()
-            ->with('menuItem')
+            ->with('menuItem') //lazy loading
             ->where('status', 'pending')
             ->get();
     }
@@ -92,13 +96,25 @@ class ViewCart extends Component
 
     public function updateOrderTotal()
     {
-        $subtotal = $this->order->orderItems()->where('status', 'pending')->sum('line_total');
+        $subtotal = $this->order->orderItems()
+            ->where('status', 'pending')->sum('line_total');
         $this->order->update([
             'subtotal' => $subtotal,
             'total_amount' => $subtotal, // Add tax/discount logic later
         ]);
     }
 
+    public function placeOrder(){
+        $this->order->orderItems()->where('status','pending')->update([
+            'status' => 'preparing',
+        ]);
+        $this->toast(
+            title:'Order placed',
+            description:'Order placed successfully',
+            type:'success'
+        );
+        return redirect()->route('select-table');
+    }
     public function back()
     {
         return redirect()->route('select-item');

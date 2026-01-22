@@ -13,6 +13,7 @@ use App\Livewire\Auth\ResetPassword;
 use App\Livewire\SelectTable;
 use App\Livewire\SelectItem;
 use App\Livewire\ViewCart;
+use App\Livewire\ViewOrder;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/select-table', SelectTable::class)->name('select-table');
     Route::get('/select-item', SelectItem::class)->name('select-item');
     Route::get('/view-cart', ViewCart::class)->name('view-cart');
+    Route::get('/view-order', ViewOrder::class)->name('view-order');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect()->route('login');

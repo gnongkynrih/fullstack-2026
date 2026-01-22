@@ -1,4 +1,6 @@
 <div class="min-h-screen bg-gray-50">
+    <p class="p-4 text-lg font-semibold text-primary-500">Current Selected Table: {{ session('table_name') }}</p>
+    
     <!-- Category Tabs -->
     @include('livewire.sale.show-categories')
 

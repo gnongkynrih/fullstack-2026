@@ -8,6 +8,11 @@ class TableSession extends Model
 {
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'opened_at' => 'datetime',
+        'closed_at' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

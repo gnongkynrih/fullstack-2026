@@ -11,7 +11,9 @@ class SelectTable extends Component
 {
     use Toast;
     public $showGuestForm = false;
+    public $showReservationModal = false;
     public $selectedTableId = null;
+    public $reservationTableId = null;
     public $guestCount =1;
     public $email = '';
 
@@ -68,9 +70,33 @@ class SelectTable extends Component
         $this->guestCount = 1;
         $this->email = '';
     }
-    public function reserveTable($tableId)
+    public function openReservationModal()
     {
-        $table = RestaurantTable::findOrFail($tableId);
+        $this->showReservationModal = true;
+        $this->reservationTableId = null;
+    }
+
+    public function toggleReservation()
+    {
+        if (!$this->reservationTableId) {
+            $this->toast(
+                type: 'error',
+                title: 'Error',
+                description: 'Please select a table',
+            );
+            return;
+        }
+
+        $table = RestaurantTable::findOrFail($this->reservationTableId);
+
+        if ($table->status === 'occupied') {
+            $this->toast(
+                type: 'error',
+                title: 'Cannot Reserve',
+                description: 'This table is currently occupied',
+            );
+            return;
+        }
 
         if ($table->status === 'reserved') {
             $table->update(['status' => 'available']);
@@ -85,6 +111,9 @@ class SelectTable extends Component
             title: 'Status Updated',
             description: $message,
         );
+
+        $this->showReservationModal = false;
+        $this->reservationTableId = null;
     }
 
     public function render()

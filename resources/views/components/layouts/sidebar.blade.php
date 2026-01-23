@@ -19,10 +19,12 @@
         </x-menu-sub>
         @endrole       
         @role('waiter')
-        <x-menu-item title="Select Table" link="{{route('select-table')}}" />
+        <x-menu-item title="Staff Home" icon="o-home" link="{{route('staff-home')}}" />
+        <x-menu-item title="Dine In" link="{{route('select-table')}}" />
         @endrole 
         @auth
             <x-menu-item title="View Order" link="{{route('view-order')}}" />
+            <x-menu-item title="Checkout" link="{{route('checkout')}}" />
         @endauth      
     </x-menu>
     

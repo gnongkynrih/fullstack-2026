@@ -124,15 +124,7 @@ class SelectItem extends Component
                 ->sum('line_total'),
         ]);
 
-        //use alternate simplier method
-        //select sum(line_total) as total from order_items 
-        // where order_id = $this->order->id and status = 'pending'
-        // $sum = OrderItem::where('order_id',$this->order->id)
-        //     ->where('status', 'pending')
-        //     ->sum('line_total');
-        // $this->order->update([
-        //     'total_amount' => $sum,
-        // ]);
+       
     }
     public function viewCart()
     {
@@ -141,6 +133,7 @@ class SelectItem extends Component
 
     public function render()
     {
+        $this->loadCartItems();
         return view('livewire.select-item');
     }
 }

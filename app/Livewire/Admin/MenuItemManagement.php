@@ -68,6 +68,12 @@ class MenuItemManagement extends Component
         $menuItem->is_active = $this->is_active;
         $menuItem->menu_category_id = $this->category_id;
         $menuItem->save();
+
+        if($this->is_active){
+            $menuItem->menuCategory()->update([
+                'is_active' => true,
+            ]);
+        }
         $this->toast(
             type: 'success',
             title: $this->isEdit ? 'Item updated successfully' : 'Item created successfully',

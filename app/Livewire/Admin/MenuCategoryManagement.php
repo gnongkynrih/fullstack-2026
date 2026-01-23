@@ -84,6 +84,10 @@ class MenuCategoryManagement extends Component
         $category->name = $this->name;
         $category->is_active = $this->is_active;
         $category->save();
+
+        $category->menuItems()->update([
+            'is_active' => $this->is_active,
+        ]);
         $this->toast(
             type: 'success',
             title: 'Category updated successfully',

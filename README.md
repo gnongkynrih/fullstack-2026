@@ -100,3 +100,25 @@ MAIL_ENCRYPTION=null
 
 //FOR ANIMATION WE WILL USE
 https://animate.style/
+add this in the head tag of the layout
+
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+
+//payment gateway
+https://razorpay.com/
+register
+siginup
+https://accounts.razorpay.com/auth/?redirecturl=https%3A%2F%2Feasy.razorpay.com&auth_intent=signup&x-country-code=IN
+
+//to install razorpay
+composer require razorpay/razorpay
+
+//to publish the migration
+php artisan vendor:publish --provider="Razorpay\RazorpayServiceProvider"
+//run the migration
+php artisan migrate

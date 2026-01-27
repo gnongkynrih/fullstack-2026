@@ -32,6 +32,7 @@ class Login extends Component
             ], 
             $this->remember);
         if ($authenticate) {
+            \Log::info('User logged in', ['user_id' => Auth::user()->id]);
             session()->regenerate(); //generates a new session id
             if (Auth::user()->hasRole('waiter')) {
                 return redirect()->intended('/staff-home'); //redirects to the intended page

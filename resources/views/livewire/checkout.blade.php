@@ -216,12 +216,25 @@
 
             <x-slot:actions>
                 <x-button label="Cancel" @click="$wire.showPaymentModal = false" />
-                <x-button 
-                    label="Confirm Payment" 
-                    icon="o-check-circle"
-                    class="btn-primary" 
-                    wire:click="processPayment" 
-                />
+                @if($paymentMethod === 'cash')
+                    <x-button 
+                        label="Confirm Cash Payment" 
+                        icon="o-check-circle"
+                        class="btn-primary" 
+                        wire:click="processCashPayment" 
+                    />
+                @else
+                    <button
+                        type="button"
+                        onclick="openRazorpayCheckout()"
+                        class="inline-flex items-center justify-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-all"
+                    >
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                        Proceed to Pay ₹{{ number_format($totalAmount, 2) }}
+                    </button>
+                @endif
             </x-slot:actions>
         </x-modal>
 
@@ -240,4 +253,67 @@
         </div>
         @endif
     </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <script>
+        async function openRazorpayCheckout() {
+            try {
+                // Call Livewire method to create Razorpay order
+                const response = await @this.call('createRazorpayOrder');
+                
+                // Get the order details from component properties
+                const razorpayOrderId = @this.razorpayOrderId;
+                const totalAmount = @this.totalAmount;
+                const tableName = @this.selectedTable?.name || 'Table';
+                
+                if (!razorpayOrderId) {
+                    throw new Error('Failed to create Razorpay order');
+                }
+                
+                const options = {
+                    key: '{{ $razorpayKey }}',
+                    amount: 100, //Math.round(totalAmount * 100), // Convert to paise
+                    currency: 'INR',
+                    name: 'Restaurant POS',
+                    description: 'Payment for ' + tableName,
+                    order_id: razorpayOrderId,
+                    handler: function (response) {
+                        console.log('Payment successful:', response);
+                        
+                        // Verify payment on server
+                        @this.call('verifyPayment',
+                            response.razorpay_payment_id,
+                            response.razorpay_order_id,
+                            response.razorpay_signature
+                        );
+                        
+                        // Close modal
+                        @this.showPaymentModal = false;
+                    },
+                    prefill: {
+                        name: 'Waiter',
+                        email: 'wait@admin.com',
+                        contact: '9863098630'
+                    },
+                    theme: {
+                        color: '#3b82f6'
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            console.log('Payment cancelled by user');
+                            @this.showPaymentModal = false;
+                        }
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.open();
+                
+            } catch (error) {
+                console.error('Error opening Razorpay:', error);
+                alert('Failed to open payment gateway: ' + error.message);
+            }
+        }
+    </script>
 </div>

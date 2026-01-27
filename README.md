@@ -122,3 +122,8 @@ composer require razorpay/razorpay
 php artisan vendor:publish --provider="Razorpay\RazorpayServiceProvider"
 //run the migration
 php artisan migrate
+
+When prompted for the UPI ID / VPA (Virtual Payment Address), enter one of these special test VPAs:For successful payment: success@razorpay
+(This simulates an instant successful transaction.)
+For failed payment: failure@razorpay
+(This instantly triggers a declined/failed transaction.)

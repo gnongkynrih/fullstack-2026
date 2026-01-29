@@ -25,6 +25,7 @@
         @auth
             <x-menu-item title="View Order" link="{{route('view-order')}}" />
             <x-menu-item title="Checkout" link="{{route('checkout')}}" />
+            <x-menu-item title="Sale Report" icon="o-chart-bar" link="{{route('sale-report')}}" />
         @endauth      
     </x-menu>
     

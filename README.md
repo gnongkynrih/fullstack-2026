@@ -127,3 +127,12 @@ When prompted for the UPI ID / VPA (Virtual Payment Address), enter one of these
 (This simulates an instant successful transaction.)
 For failed payment: failure@razorpay
 (This instantly triggers a declined/failed transaction.)
+
+for exporting to excel
+https://docs.laravel-excel.com/3.1/getting-started/installation.html
+composer require "maatwebsite/excel"
+php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+
+for exporting to pdf
+https://github.com/barryvdh/laravel-dompdf
+composer require dompdf/dompdf

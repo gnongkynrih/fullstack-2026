@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\TableManagement;
 use App\Livewire\Admin\MenuItemManagement;
 use App\Livewire\Admin\MenuCategoryManagement;
-
+use App\Livewire\Report\SaleReport;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/menu-category-management', MenuCategoryManagement::class)->name('admin.menu-category-management');
@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/view-cart', ViewCart::class)->name('view-cart');
     Route::get('/view-order', ViewOrder::class)->name('view-order');
     Route::get('/checkout', Checkout::class)->name('checkout');
+    Route::get('/sale-report', SaleReport::class)->name('sale-report');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect()->route('login');

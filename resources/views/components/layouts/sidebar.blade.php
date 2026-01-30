@@ -16,6 +16,7 @@
             <x-menu-item title="Menu Items" link="{{route('admin.menu-item-management')}}" />
             <x-menu-item title="Tables" link="{{route('admin.table-management')}}" />
             <x-menu-item title="Users" link="{{route('admin.user')}}" />
+            <x-menu-item title="Import Data" link="{{route('import-data')}}" />
         </x-menu-sub>
         @endrole       
         @role('waiter')

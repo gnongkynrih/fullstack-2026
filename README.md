@@ -21,6 +21,10 @@ composer create-project larave/laravel projname
 cd projname
 npm install
 npm run dev
+
+//to create a link for storage
+php artisan storage:link
+
 composer install
 //install livewire
 composer require livewire/livewire

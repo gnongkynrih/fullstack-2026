@@ -18,12 +18,14 @@ use App\Livewire\Admin\TableManagement;
 use App\Livewire\Admin\MenuItemManagement;
 use App\Livewire\Admin\MenuCategoryManagement;
 use App\Livewire\Report\SaleReport;
+use App\Livewire\ImportData;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/menu-category-management', MenuCategoryManagement::class)->name('admin.menu-category-management');
     Route::get('/admin/menu-item-management', MenuItemManagement::class)->name('admin.menu-item-management');
     Route::get('/admin/table-management', TableManagement::class)->name('admin.table-management');
     Route::get('/user', Register::class)->name('admin.user');
+    Route::get('/import-data', ImportData::class)->name('import-data');
 });
 
 Route::get('/login', Login::class)->name('login');

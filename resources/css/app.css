@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+
+/**
+    The lines above are intact.
+    The lines below were added by maryUI installer.
+*/
+
+/** daisyUI */
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+}
+
+/* maryUI */
+@source "../../vendor/robsontenorio/mary/src/View/Components/**/*.php";
+
+/* Theme toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+* Paginator - Traditional style
+* Because Laravel defaults does not match well the design of daisyUI.
+*/
+
+.mary-table-pagination span[aria-current="page"] > span {
+    @apply bg-primary text-base-100;
+}
+
+.mary-table-pagination button {
+    @apply cursor-pointer;
+}
+
+@theme {
+    /* Primary: Caramel Brown */
+    --color-primary-50: #fdf8f2;
+    --color-primary-100: #f5e6d3;
+    --color-primary-200: #edcca7;
+    --color-primary-300: #e3b27b;
+    --color-primary-400: #d99850;
+    --color-primary-500: #cf8033; /* Main primary color */
+    --color-primary-600: #b86f2b;
+    --color-primary-700: #a05e23;
+    --color-primary-800: #884d1b;
+    --color-primary-900: #703c13;
+    --color-primary-950: #582b0b;
+
+    /* Secondary: Muted Sage Green (great earthy accent) */
+    --color-secondary-50: #f2f7f2;
+    --color-secondary-100: #e1ede2;
+    --color-secondary-200: #c3dcc5;
+    --color-secondary-300: #a5cba8;
+    --color-secondary-400: #87ba8b;
+    --color-secondary-500: #6fa870; /* Main secondary/accent color */
+    --color-secondary-600: #5f965f;
+    --color-secondary-700: #4f844e;
+    --color-secondary-800: #3f723d;
+    --color-secondary-900: #2f602c;
+    --color-secondary-950: #1f4e1b;
+
+    /* Optional Neutrals (for text and backgrounds) */
+    --color-neutral-50: #faf9f6;
+    --color-neutral-900: #1a1a1a;
+    --color-neutral-950: #0f0f0f;
+}
